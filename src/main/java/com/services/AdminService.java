@@ -37,19 +37,20 @@ public class AdminService {
 				System.out.println("Error while connecting to the database for reading.");
 			}
 			
-			String query = "SELECT * FROM administrator";
+			String query = "SELECT * FROM administrators";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while(rs.next()) {
 				AdminModel adminModel = new AdminModel();
-				adminModel.setAdminID(rs.getInt("adminID"));
+				adminModel.setUserID(rs.getInt("userID"));
 				adminModel.setFirstName(rs.getString("firstName"));
 				adminModel.setLastName(rs.getString("lastName"));
-				adminModel.setNIC(rs.getString("NIC"));
 				adminModel.setEmail(rs.getString("email"));
 				adminModel.setMobile(rs.getString("mobile"));
+				adminModel.setServiceNo(rs.getString("serviceNo"));
 				adminModel.setDepartment(rs.getString("department"));
+				adminModel.setPosition(rs.getString("position"));
 				data.add(adminModel);
 			}
 			
@@ -65,7 +66,7 @@ public class AdminService {
 		
 	}
 	
-	public ArrayList<AdminModel> getAdministratorById(int adminID) {
+	public ArrayList<AdminModel> getAdministratorById(int userID) {
 		
 		ArrayList<AdminModel> data = new ArrayList<AdminModel>();
 
@@ -75,20 +76,21 @@ public class AdminService {
 				System.out.println("Error while connecting to the database for reading.");
 			}
 			
-			String query = "SELECT * FROM administrator WHERE adminID = ?";
+			String query = "SELECT * FROM administrators WHERE userID = ?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, adminID);
+			preparedStmt.setInt(1, userID);
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while(rs.next()) {
 				AdminModel adminModel = new AdminModel();
-				adminModel.setAdminID(rs.getInt("adminID"));
+				adminModel.setUserID(rs.getInt("userID"));
 				adminModel.setFirstName(rs.getString("firstName"));
 				adminModel.setLastName(rs.getString("lastName"));
-				adminModel.setNIC(rs.getString("NIC"));
 				adminModel.setEmail(rs.getString("email"));
 				adminModel.setMobile(rs.getString("mobile"));
+				adminModel.setServiceNo(rs.getString("serviceNo"));
 				adminModel.setDepartment(rs.getString("department"));
+				adminModel.setPosition(rs.getString("position"));
 				data.add(adminModel);
 			}
 			
@@ -104,7 +106,7 @@ public class AdminService {
 		
 	}
 	
-	public String insertAdministrator(String firstName, String lastName, String NIC, String email, String mobile, String department, String password) {
+	public String insertAdministrator(String firstName, String lastName, String email, String mobile, String password, String serviceNo, String department, String position) {
 		
 		String output = "";
 		
@@ -114,17 +116,18 @@ public class AdminService {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = "INSERT INTO administrator(`firstName`,`lastName`,`NIC`,`email`,`mobile`,`department`,`password`) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO administrators(`firstName`,`lastName`,`email`,`mobile`,`password`,`serviceNo`,`department`,`position`) VALUES(?, ?, ?, ?, ?, ?, ?,?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, firstName);
 			preparedStmt.setString(2, lastName);
-			preparedStmt.setString(3, NIC);
-			preparedStmt.setString(4, email);
-			preparedStmt.setString(5, mobile);
-			preparedStmt.setString(6, department);
-			preparedStmt.setString(7, password);
+			preparedStmt.setString(3, email);
+			preparedStmt.setString(4, mobile);
+			preparedStmt.setString(5, password);
+			preparedStmt.setString(6, serviceNo);
+			preparedStmt.setString(7, department);
+			preparedStmt.setString(8, position);
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -139,7 +142,7 @@ public class AdminService {
 		
 	}
 	
-	public String updateAdministrator(String adminID, String firstName, String lastName, String NIC, String email, String mobile, String department) {
+	public String updateAdministrator(String userID, String firstName, String lastName, String email, String mobile, String serviceNo, String department, String position) {
 		
 		String output = "";
 		
@@ -149,17 +152,18 @@ public class AdminService {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = "UPDATE administrator SET firstName = ?, lastName = ?, NIC = ?, email = ?, mobile = ?, department = ? WHERE adminID =?";
+			String query = "UPDATE administrators SET firstName = ?, lastName = ?, email = ?, mobile = ?, serviceNo = ?, department = ?, position = ? WHERE userID =?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, firstName);
 			preparedStmt.setString(2, lastName);
-			preparedStmt.setString(3, NIC);
-			preparedStmt.setString(4, email);
-			preparedStmt.setString(5, mobile);
+			preparedStmt.setString(3, email);
+			preparedStmt.setString(4, mobile);
+			preparedStmt.setString(5, serviceNo);
 			preparedStmt.setString(6, department);
-			preparedStmt.setInt(7, Integer.parseInt(adminID));
+			preparedStmt.setString(7, position);
+			preparedStmt.setInt(8, Integer.parseInt(userID));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -174,7 +178,7 @@ public class AdminService {
 		
 	}
 	
-	public String deleteAdministrator(int adminID) {
+	public String deleteAdministrator(int userID) {
 		
 		String output = "";
 		
@@ -184,10 +188,10 @@ public class AdminService {
 				return "Error while connecting to the database for inserting.";
 			}
 			
-			String query = "DELETE FROM administrator WHERE adminID = ?";
+			String query = "DELETE FROM administrators WHERE userID = ?";
 		
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, adminID);
+			preparedStmt.setInt(1, userID);
 			preparedStmt.execute();
 			con.close();
 			output = "Deleted successfully";
