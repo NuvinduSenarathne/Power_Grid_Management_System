@@ -86,13 +86,6 @@ CardService cardService = new CardService();
 		
 	}
 	
-	@DELETE
-	@Path("/delete/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteCard(@PathParam("id") int id) {
-		String output = cardService.deleteCard(id);
-		return output;
-	}
+	
 	
 }
