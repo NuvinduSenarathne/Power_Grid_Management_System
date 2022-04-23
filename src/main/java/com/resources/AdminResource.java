@@ -94,5 +94,48 @@ public class AdminResource {
 		String output = adminService.deleteAdministrator(id);
 		return output;
 	}
+	
+	@POST
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String loginAdministrator(String admin) {
+		
+		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
+		String serviceNo = adminObject.get("serviceNo").getAsString();
+		String password = adminObject.get("password").getAsString();
+		
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		String jsonAdmin = gson.toJson(adminService.loginAdministrator(serviceNo, password));
+		return jsonAdmin;
+	}
+	
+	@PUT
+	@Path("/changePwd")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String changePassword(String admin) {
+		
+		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
+
+		String userID = adminObject.get("userID").getAsString();
+		String password = adminObject.get("password").getAsString();
+		String output = adminService.changePassword(userID, password);
+		
+		return output;
+		
+	}
+	
+	@GET
+	@Path("changePwd/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePasswordById(@PathParam("id") int id) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		String jsonAdmin = gson.toJson(adminService.changePasswordById(id));
+		return jsonAdmin;
+	}
 
 }

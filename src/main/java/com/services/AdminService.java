@@ -66,9 +66,9 @@ public class AdminService {
 		
 	}
 	
-	public ArrayList<AdminModel> getAdministratorById(int userID) {
+	public AdminModel getAdministratorById(int userID) {
 		
-		ArrayList<AdminModel> data = new ArrayList<AdminModel>();
+		AdminModel adminModel = new AdminModel();
 
 		try {
 			Connection con = connect();
@@ -82,7 +82,6 @@ public class AdminService {
 			ResultSet rs = preparedStmt.executeQuery();
 			
 			while(rs.next()) {
-				AdminModel adminModel = new AdminModel();
 				adminModel.setUserID(rs.getInt("userID"));
 				adminModel.setFirstName(rs.getString("firstName"));
 				adminModel.setLastName(rs.getString("lastName"));
@@ -91,7 +90,6 @@ public class AdminService {
 				adminModel.setServiceNo(rs.getString("serviceNo"));
 				adminModel.setDepartment(rs.getString("department"));
 				adminModel.setPosition(rs.getString("position"));
-				data.add(adminModel);
 			}
 			
 			con.close();
@@ -102,7 +100,7 @@ public class AdminService {
 			System.err.println(e.getMessage());
 		}
 		
-		return data;
+		return adminModel;
 		
 	}
 	
@@ -198,6 +196,107 @@ public class AdminService {
 		}
 		catch (Exception e) {
 			output = "Error while deleting the Administrator.";
+			System.err.println(e.getMessage());
+		}
+		
+		return output;
+		
+	}
+	
+	public AdminModel loginAdministrator(String serviceNo, String password) {
+		
+		AdminModel adminModel = new AdminModel();
+
+		try {
+			Connection con = connect();
+			if (con == null) {
+				System.out.println("Error while connecting to the database for reading.");
+			}
+			
+			String query = "SELECT * FROM administrators WHERE serviceNo = ? AND password = ?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setString(1, serviceNo);
+			preparedStmt.setString(2, password);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while(rs.next()) {
+				adminModel.setUserID(rs.getInt("userID"));
+				adminModel.setFirstName(rs.getString("firstName"));
+				adminModel.setLastName(rs.getString("lastName"));
+				adminModel.setEmail(rs.getString("email"));
+				adminModel.setMobile(rs.getString("mobile"));
+				adminModel.setServiceNo(rs.getString("serviceNo"));
+				adminModel.setDepartment(rs.getString("department"));
+				adminModel.setPosition(rs.getString("position"));
+			}
+			
+			con.close();
+			
+		}
+		catch (Exception e) {
+			System.out.println("Error while loging the System!");
+			System.err.println(e.getMessage());
+		}
+		
+		return adminModel;
+		
+	}
+	
+	public AdminModel changePasswordById(int userID) {
+		
+		AdminModel adminModel = new AdminModel();
+
+		try {
+			Connection con = connect();
+			if (con == null) {
+				System.out.println("Error while connecting to the database for reading.");
+			}
+			
+			String query = "SELECT * FROM administrators WHERE userID = ?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setInt(1, userID);
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while(rs.next()) {
+				adminModel.setUserID(rs.getInt("userID"));
+				adminModel.setPassword(rs.getString("password"));
+			}
+			
+			con.close();
+			
+		}
+		catch (Exception e) {
+			System.out.println("Error while reading the Password!");
+			System.err.println(e.getMessage());
+		}
+		
+		return adminModel;
+		
+	}
+	
+	public String changePassword(String userID, String password) {
+		
+		String output = "";
+		
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for inserting.";
+			}
+			// create a prepared statement
+			String query = "UPDATE administrators SET password = ? WHERE userID =?";
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setString(1, password);
+			preparedStmt.setInt(2, Integer.parseInt(userID));
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Changed Password successfully";
+		}
+		catch (Exception e) {
+			output = "Error while Changing the Password.";
 			System.err.println(e.getMessage());
 		}
 		
