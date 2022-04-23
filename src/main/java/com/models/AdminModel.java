@@ -1,79 +1,29 @@
 package com.models;
 
-public class AdminModel {
+public class AdminModel extends UserModel {
 	
-	private int adminID;
-	private String firstName;
-	private String lastName;
-	private String NIC;
-	private String email;
-	private String mobile;
+	private String serviceNo;
 	private String department;
-	private String password;
+	private String position;
 	
 	public AdminModel() {
 		super();
 	}
 	
-	public AdminModel(int adminID, String firstName, String lastName, String NIC, String email, String mobile,
-			String department, String password) {
-		super();
-		this.adminID = adminID;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.NIC = NIC;
-		this.email = email;
-		this.mobile = mobile;
+	public AdminModel(int userID,  String firstName, String lastName, String email,
+			String mobile, String password, String serviceNo, String department, String position) {
+		super(userID, firstName, lastName, email, mobile, password);
+		this.serviceNo = serviceNo;
 		this.department = department;
-		this.password = password;
+		this.position = position;
 	}
 
-	public int getAdminID() {
-		return adminID;
+	public String getServiceNo() {
+		return serviceNo;
 	}
 
-	public void setAdminID(int adminID) {
-		this.adminID = adminID;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getNIC() {
-		return NIC;
-	}
-
-	public void setNIC(String nIC) {
-		NIC = nIC;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setServiceNo(String serviceNo) {
+		this.serviceNo = serviceNo;
 	}
 
 	public String getDepartment() {
@@ -84,12 +34,12 @@ public class AdminModel {
 		this.department = department;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPosition() {
+		return position;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 }

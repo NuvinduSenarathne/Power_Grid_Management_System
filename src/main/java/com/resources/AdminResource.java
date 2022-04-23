@@ -52,12 +52,13 @@ public class AdminResource {
 		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
 		String firstName = adminObject.get("firstName").getAsString();
 		String lastName = adminObject.get("lastName").getAsString();
-		String NIC = adminObject.get("NIC").getAsString();
 		String email = adminObject.get("email").getAsString();
 		String mobile = adminObject.get("mobile").getAsString();
-		String department = adminObject.get("department").getAsString();
 		String password = adminObject.get("password").getAsString();
-		String output = adminService.insertAdministrator(firstName, lastName, NIC, email, mobile, department, password);
+		String serviceNo = adminObject.get("serviceNo").getAsString();
+		String department = adminObject.get("department").getAsString();
+		String position = adminObject.get("position").getAsString();
+		String output = adminService.insertAdministrator(firstName, lastName, email, mobile, password, serviceNo, department, position);
 		
 		return output;
 		
@@ -71,14 +72,15 @@ public class AdminResource {
 		
 		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
 
-		String adminID = adminObject.get("adminID").getAsString();
+		String userID = adminObject.get("userID").getAsString();
 		String firstName = adminObject.get("firstName").getAsString();
 		String lastName = adminObject.get("lastName").getAsString();
-		String NIC = adminObject.get("NIC").getAsString();
 		String email = adminObject.get("email").getAsString();
 		String mobile = adminObject.get("mobile").getAsString();
+		String serviceNo = adminObject.get("serviceNo").getAsString();
 		String department = adminObject.get("department").getAsString();
-		String output = adminService.updateAdministrator(adminID, firstName, lastName, NIC, email, mobile, department);
+		String position = adminObject.get("position").getAsString();
+		String output = adminService.updateAdministrator(userID, firstName, lastName, email, mobile, serviceNo, department, position);
 		
 		return output;
 		
@@ -91,6 +93,38 @@ public class AdminResource {
 	public String deleteAdministrator(@PathParam("id") int id) {
 		String output = adminService.deleteAdministrator(id);
 		return output;
+	}
+	
+	@POST
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String loginAdministrator(String admin) {
+		
+		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
+		String serviceNo = adminObject.get("serviceNo").getAsString();
+		String password = adminObject.get("password").getAsString();
+		
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		String jsonAdmin = gson.toJson(adminService.loginAdministrator(serviceNo, password));
+		return jsonAdmin;
+	}
+	
+	@PUT
+	@Path("/changePwd")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String changePassword(String admin) {
+		
+		JsonObject adminObject = new JsonParser().parse(admin).getAsJsonObject();
+
+		String userID = adminObject.get("userID").getAsString();
+		String password = adminObject.get("password").getAsString();
+		String output = adminService.changePassword(userID, password);
+		
+		return output;
+		
 	}
 
 }
