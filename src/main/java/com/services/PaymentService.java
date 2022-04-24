@@ -56,7 +56,7 @@ public ArrayList<PaymentModel> getPayments() {
 		
 	}
 	catch (Exception e) {
-		System.out.println("Error while reading the Administrators!");
+		System.out.println("Error while reading the Payments!");
 		System.err.println(e.getMessage());
 	}
 	
@@ -95,7 +95,7 @@ PaymentModel paymentModel = new PaymentModel();
 		
 	}
 	catch (Exception e) {
-		System.out.println("Error while reading the Administrator!");
+		System.out.println("Error while reading the Payment!");
 		System.err.println(e.getMessage());
 	}
 	
