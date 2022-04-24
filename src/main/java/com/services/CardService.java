@@ -28,7 +28,7 @@ public class CardService {
 			
 		}
 	
-	public ArrayList<CardModel> getCard() {
+	public ArrayList<CardModel> getCards() {
 			
 			ArrayList<CardModel> data = new ArrayList<CardModel>();
 	
