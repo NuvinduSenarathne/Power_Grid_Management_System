@@ -31,7 +31,7 @@ CardService cardService = new CardService();
 	public String getCard() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		String jsonCards = gson.toJson(cardService.getCard());
+		String jsonCards = gson.toJson(cardService.getCards());
 		return jsonCards;
 	}
 	
@@ -84,6 +84,15 @@ CardService cardService = new CardService();
 		
 		return output;
 		
+	}
+	
+	@DELETE
+	@Path("/delete/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteCard(@PathParam("id") int id) {
+		String output = cardService.deleteCard(id);
+		return output;
 	}
 	
 	
