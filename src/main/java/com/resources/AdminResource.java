@@ -126,5 +126,16 @@ public class AdminResource {
 		return output;
 		
 	}
+	
+	@GET
+	@Path("changePwd/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePasswordById(@PathParam("id") int id) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		String jsonAdmin = gson.toJson(adminService.changePasswordById(id));
+		return jsonAdmin;
+	}
 
 }
