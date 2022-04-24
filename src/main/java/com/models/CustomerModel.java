@@ -4,6 +4,7 @@ public class CustomerModel  extends UserModel{
 	
 	private String address;
 	private String postalCode;
+	private String postal;
 
 	public CustomerModel() {
 		super();
