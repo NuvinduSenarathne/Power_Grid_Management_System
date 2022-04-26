@@ -120,7 +120,7 @@ public class CustomerResource {
 	
 	
 	@PUT
-	@Path("/changePwd")
+	@Path("/changePassword")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String changePassword(String customer) {
@@ -136,7 +136,7 @@ public class CustomerResource {
 	}
 	
 	@GET
-	@Path("changePwd/{id}")
+	@Path("changePassword/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String changePasswordById(@PathParam("id") int id) {
