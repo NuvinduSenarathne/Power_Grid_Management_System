@@ -23,8 +23,8 @@ PaymentService paymentService = new PaymentService();
 	public String getPayments() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		String jsonAdmins = gson.toJson(paymentService.getPayments());
-		return jsonAdmins;
+		String jsonPayment = gson.toJson(paymentService.getPayments());
+		return jsonPayment;
 	}
 	
 	@GET
@@ -34,8 +34,8 @@ PaymentService paymentService = new PaymentService();
 	public String getUsageById(@PathParam("id") int id) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		String jsonAdmin = gson.toJson(paymentService.getPaymentById(id));
-		return jsonAdmin;
+		String jsonPayment = gson.toJson(paymentService.getPaymentById(id));
+		return jsonPayment;
 	}
 
 	

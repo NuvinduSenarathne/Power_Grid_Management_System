@@ -104,7 +104,7 @@ public class CardService {
 		
 	}
 
-	public String insertCard(int cardNo, String cardType, int cvv, String expDate ) {
+	public String insertCard(String cardNo, String cardType, String cvv, String expDate ) {
 			
 			String output = "";
 			
@@ -118,9 +118,9 @@ public class CardService {
 				
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
-				preparedStmt.setInt(1, cardNo);
+				preparedStmt.setString(1, cardNo);
 				preparedStmt.setString(2, cardType);
-				preparedStmt.setInt(3, cvv);
+				preparedStmt.setString(3, cvv);
 				preparedStmt.setString(4, expDate);
 				
 				// execute the statement
@@ -137,7 +137,7 @@ public class CardService {
 			
 		}
 	
-	public String updateCard(int cardID,int cardNo, String cardType, int cvv, String expDate) {
+	public String updateCard(String cardID ,String cardNo, String cardType, String cvv, String expDate) {
 		
 		String output = "";
 		
@@ -151,10 +151,13 @@ public class CardService {
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, cardNo);
+			
+			preparedStmt.setString(1, cardNo);
 			preparedStmt.setString(2, cardType);
-			preparedStmt.setInt(3, cvv);
+			preparedStmt.setString(3, cvv);
 			preparedStmt.setString(4, expDate);
+			preparedStmt.setInt(5, Integer.parseInt(cardID));
+		
 			
 			// execute the statement
 			preparedStmt.execute();

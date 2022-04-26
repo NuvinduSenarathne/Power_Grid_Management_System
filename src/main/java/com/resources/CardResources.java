@@ -54,9 +54,9 @@ CardService cardService = new CardService();
 		
 		JsonObject cardObject = new JsonParser().parse(card).getAsJsonObject();
 		
-		int cardNo = cardObject.get("cardNo").getAsInt();
+		String cardNo = cardObject.get("cardNo").getAsString();
 		String cardType = cardObject.get("cardType").getAsString();
-		int cvv = cardObject.get("cvv").getAsInt();
+		String cvv = cardObject.get("cvv").getAsString();
 		String expDate = cardObject.get("expDate").getAsString();
 		
 		String output = cardService.insertCard(cardNo, cardType, cvv, expDate);
@@ -73,10 +73,10 @@ CardService cardService = new CardService();
 		
 		JsonObject cardObject = new JsonParser().parse(card).getAsJsonObject();
 
-		int cardID = cardObject.get("cardID").getAsInt();
-		int cardNo = cardObject.get("cardNo").getAsInt();
+		String cardID = cardObject.get("cardID").getAsString();
+		String cardNo = cardObject.get("cardNo").getAsString();
 		String cardType = cardObject.get("cardType").getAsString();
-		int cvv = cardObject.get("cvv").getAsInt();
+		String cvv = cardObject.get("cvv").getAsString();
 		String expDate = cardObject.get("expDate").getAsString();
 		
 		
