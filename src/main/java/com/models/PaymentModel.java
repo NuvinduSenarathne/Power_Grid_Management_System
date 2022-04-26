@@ -60,6 +60,6 @@ public class PaymentModel {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
+	//...
 	
 }
