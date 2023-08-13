@@ -1,0 +1,66 @@
+@charset "ISO-8859-1";
+
+nav {
+	height: 8vh;
+}
+
+nav h4 {
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.adminBody {
+	width: 100%;
+	padding: 20px 60px;
+}
+
+.adminHeading {
+	height: 8vh;
+	padding: 0px 10px;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+}
+
+.adminHeading h5 {
+    width: 40%;
+}
+
+.adminContent {
+	height: auto;
+    margin: 20px 0px;
+}
+
+#formAdmin {
+    padding: 10px;
+    background-color: gainsboro;
+}
+
+#formAdmin .left {
+    width: 50%;
+    display: inline-block;
+    padding: 0px 10px;
+    float: left;
+}
+
+#formAdmin .right {
+    width: 50%;
+    display: inline-block;
+    float: left;
+    padding: 0px 10px;
+}
+
+#formAdmin .bottom {
+    width: 100%;
+    padding: 0 20%;
+}
+
+#formAdmin .bottom input {
+    width: 100%;
+}
+
+#formAdmin .bottom .displayErr {
+    display: flex;
+    margin: 10px 0px;
+}
